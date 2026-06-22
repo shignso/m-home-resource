@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>久游 · 日常叙说</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5faf9;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1e2c2a;
+      padding: 2rem 1.25rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-wrap {
+      max-width: 780px;
+      width: 100%;
+    }
+
+    /* 开场短句 —— 轻巧留白 */
+    .opening {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: #2b5f5a;
+      border-left: 4px solid #3fa39a;
+      padding-left: 1.2rem;
+      margin-bottom: 2rem;
+      font-weight: 360;
+      line-height: 1.7;
+    }
+
+    .opening strong {
+      font-weight: 500;
+      color: #1f504b;
+    }
+
+    /* 承接段落 —— 网格卡片风格 */
+    .narrative-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(45, 115, 108, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+      border: 1px solid #dcf0ed;
+      transition: box-shadow 0.2s;
+    }
+
+    .narrative-card p {
+      margin-bottom: 1rem;
+      color: #1c2f2b;
+      font-size: 1rem;
+    }
+
+    .narrative-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 特点列表 —— 网格卡片式 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0 2.2rem;
+    }
+
+    .feature-item {
+      background: white;
+      border-radius: 22px;
+      padding: 1.2rem 1rem 1rem 1.2rem;
+      border: 1px solid #d7ece8;
+      box-shadow: 0 2px 8px rgba(20, 80, 75, 0.03);
+      transition: transform 0.15s ease, border-color 0.2s;
+    }
+
+    .feature-item:hover {
+      border-color: #6ac4ba;
+      transform: translateY(-2px);
+    }
+
+    .feature-item .emoji-badge {
+      display: inline-block;
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-item h3 {
+      font-size: 1.05rem;
+      font-weight: 520;
+      color: #1b524b;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: #3b5c57;
+      line-height: 1.5;
+    }
+
+    /* 温和结尾 —— 嵌入链接 */
+    .closing {
+      background: #e7f6f3;
+      border-radius: 32px;
+      padding: 1.6rem 1.8rem;
+      margin-top: 0.8rem;
+      border: 1px solid #b5ddd6;
+      color: #1b403b;
+      font-size: 0.98rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.2rem 0.4rem;
+    }
+
+    .closing a {
+      color: #1c7e73;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px dotted #56b0a5;
+      padding-bottom: 0.05rem;
+      transition: border-bottom 0.15s, color 0.2s;
+    }
+
+    .closing a:hover {
+      color: #14554c;
+      border-bottom: 1.5px solid #14554c;
+    }
+
+    /* FAQ 摘要 —— 简约折叠感 */
+    .faq-mini {
+      margin: 2.2rem 0 1.8rem;
+      background: white;
+      border-radius: 28px;
+      padding: 1.2rem 1.6rem 1.4rem;
+      border: 1px solid #d2e8e4;
+    }
+
+    .faq-mini summary {
+      font-weight: 480;
+      color: #1a6159;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+      list-style: disclosure-closed inside;
+    }
+
+    .faq-mini[open] summary {
+      list-style: disclosure-open inside;
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-mini p {
+      font-size: 0.92rem;
+      color: #2b4d48;
+      padding-left: 0.4rem;
+      border-left: 2px solid #96cdc4;
+      padding-left: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #cde3df;
+      margin: 2rem 0 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 500px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+      }
+
+      .narrative-card {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .closing {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        padding: 1.4rem 1.2rem;
+      }
+
+      .opening {
+        font-size: 1rem;
+        padding-left: 1rem;
+      }
+    }
+
+    /* 极简 footer */
+    .footnote {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #779c96;
+      margin-top: 2.8rem;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- 开场短句 -->
+    <div class="opening">
+      <strong>久游</strong> 听起来像是一个慢慢走路的词。<br>
+      不赶时间，也不绕路——就只是待在自己的节奏里。
+    </div>
+
+    <!-- 承接段落 故事感 -->
+    <div class="narrative-card">
+      <p>去年秋天我开始留意一个叫 <strong>jiuyou</strong> 的角落。没有铺天盖地的宣传，没有浮夸的引导，只是安静地提供一些可以细看的东西。后来我把它的链接存在手机桌面上，偶尔打开，像翻开一本旧杂志的某一页。</p>
+      <p>它不是一个需要被“访问”的站点，更像一处可以随时停留的短亭。内容不拥挤，也不冷清，恰好在让人觉得舒服的密度里。有人把它当作灵感便签，也有人只是习惯性地去翻一翻。</p>
+    </div>
+
+    <!-- 特点列表 网格卡片 -->
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="emoji-badge">🌱</div>
+        <h3>不喧哗</h3>
+        <p>没有弹窗和倒计时，页面自顾自地展开，像朋友递过来的一杯温水。</p>
+      </div>
+      <div class="feature-item">
+        <div class="emoji-badge">📎</div>
+        <h3>有质感</h3>
+        <p>字体、间距、留白都经过斟酌，读起来眼睛不累，也不显得刻意。</p>
+      </div>
+      <div class="feature-item">
+        <div class="emoji-badge">🔄</div>
+        <h3>常更新</h3>
+        <p>内容像季节轮换，不会一成不变，但也从不催促你跟上节奏。</p>
+      </div>
+      <div class="feature-item">
+        <div class="emoji-badge">🧩</div>
+        <h3>小场景</h3>
+        <p>每一段文字、每一张图都像生活里截取的一个切片，真实而具体。</p>
+      </div>
+    </div>
+
+    <!-- 温和结尾 + 嵌入链接（自然句子） -->
+    <div class="closing">
+      <span>如果你也喜欢这样不着急的浏览体验，不妨把</span>
+      <a href="https://m-cn-jiuyou.com">jiuyou</a>
+      <span>加入你的日常收藏——它一直都在那里，不急不躁。</span>
+    </div>
+
+    <!-- FAQ 摘要（轻量） -->
+    <details class="faq-mini">
+      <summary>关于 jiuyou 的几个小问题</summary>
+      <p><strong>适合什么人？</strong> 适合喜欢安静阅读、对界面细节有要求、不追求信息轰炸的人。</p>
+      <p><strong>内容偏向？</strong> 以生活观察、轻思考、实用记录为主，没有固定栏目，更像一个逐渐生长的笔记本。</p>
+      <p><strong>需要注册吗？</strong> 不需要，打开即看，没有门槛。</p>
+    </details>
+
+    <hr>
+
+    <div class="footnote">
+      慢慢来 · 久游
+    </div>
+  </div>
+</body>
+</html>
